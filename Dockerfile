@@ -12,12 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+FROM golang:1.16-alpine AS builder
+
+WORKDIR /app
+ENV CGO_ENABLED=0
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN go build -o eventrouter .
+
 FROM alpine:3.9
 MAINTAINER Timothy St. Clair "tstclair@heptio.com"  
 
 WORKDIR /app
 RUN apk update --no-cache && apk add ca-certificates
-ADD eventrouter /app/
+#ADD eventrouter /app/
+COPY --from=builder /app/eventrouter /app/eventrouter
 USER nobody:nobody
 
 CMD ["/bin/sh", "-c", "/app/eventrouter -v 3 -logtostderr"]
