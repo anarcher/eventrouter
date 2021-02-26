@@ -23,6 +23,7 @@ func (s *LogfmtSink) UpdateEvents(eNew *v1.Event, eOld *v1.Event) {
 	obj = fmt.Sprintf("%s/%s", strings.ToLower(eNew.InvolvedObject.Kind), eNew.InvolvedObject.Name)
 
 	rec := []interface{}{
+		"time", eNew.LastTimestamp,
 		"namespace", eNew.Namespace,
 		"type", eNew.Type,
 		"reason", eNew.Reason,
