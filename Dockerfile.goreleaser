@@ -1,0 +1,8 @@
+FROM alpine:3.9
+
+WORKDIR /app
+RUN apk update --no-cache && apk add ca-certificates
+COPY eventrouter /app/eventrouter
+USER nobody:nobody
+
+CMD ["/bin/sh", "-c", "/app/eventrouter -v 3 -logtostderr"]

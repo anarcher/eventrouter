@@ -31,6 +31,7 @@ dockers:
       - "--pull"
       - "--platform=linux/amd64"
     goarch: amd64
+    dockerfile: Dockerfile.goreleaser
     extra_files:
       - go.sum
       - go.mod
@@ -41,6 +42,7 @@ dockers:
       - "--pull"
       - "--platform=linux/arm64"
     goarch: arm64
+    dockerfile: Dockerfile.goreleaser
     extra_files:
       - go.sum
       - go.mod
