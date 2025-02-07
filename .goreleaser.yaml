@@ -37,6 +37,7 @@ changelog:
   filters:
     exclude:
       - "^test:"
+      - "^chore:"
 
 release:
   footer: >-
