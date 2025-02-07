@@ -24,7 +24,11 @@ dockers:
   - image_templates:
       - "anarcher/eventrouter:{{ .Version }}"
       - "anarcher/eventrouter:latest"
-    use: "buildx"
+    use: buildx
+    buildx:
+      platforms:
+        - linux/amd64
+        - linux/arm64
     build_flag_templates:
       - "--pull"
       - "--label=org.opencontainers.image.created={{.Date}}"
