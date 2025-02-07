@@ -30,6 +30,10 @@ dockers:
     build_flag_templates:
       - "--pull"
       - "--platform=linux/amd64"
+    goarch: amd64
+    extra_files:
+      - go.sum
+      - go.mod
   - image_templates:
       - "anarcher/eventrouter:{{ .Tag }}-arm64"
     use: buildx
@@ -37,6 +41,9 @@ dockers:
       - "--pull"
       - "--platform=linux/arm64"
     goarch: arm64
+    extra_files:
+      - go.sum
+      - go.mod
 
 docker_manifests:
   - name_template: "anarcher/eventrouter:{{ .Tag }}"
