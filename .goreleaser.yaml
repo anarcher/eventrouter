@@ -22,16 +22,24 @@ builds:
 
 dockers:
   - image_templates:
-      - "anarcher/eventrouter:{{ .Version }}"
-      - "anarcher/eventrouter:latest"
+      - "anarcher/eventrouter:{{ .Tag }}-amd64"
     use: buildx
     build_flag_templates:
       - "--pull"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title={{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
-      - "--platform=linux/amd64,linux/arm64"
+      - "--platform=linux/amd64"
+  - image_templates:
+      - "anarcher/eventrouter:{{ .Tag }}-arm64"
+    use: buildx
+    build_flag_templates:
+      - "--pull"
+      - "--platform=linux/arm64"
+    goarch: arm64
+
+docker_manifests:
+  - name_template: "anarcher/eventrouter:{{ .Tag }}"
+    image_templates:
+      - "anarcher/eventrouter:{{ .Tag }}-amd64"
+      - "anarcher/eventrouter:{{ .Tag }}-arm64"
 
 changelog:
   sort: asc
