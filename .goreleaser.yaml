@@ -24,6 +24,7 @@ dockers:
   - image_templates:
       - "anarcher/eventrouter:{{ .Version }}"
       - "anarcher/eventrouter:latest"
+    use: "buildx"
     build_flag_templates:
       - "--pull"
       - "--label=org.opencontainers.image.created={{.Date}}"
