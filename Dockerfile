@@ -24,7 +24,6 @@ COPY . .
 RUN go build -o eventrouter .
 
 FROM alpine:3.9
-MAINTAINER Timothy St. Clair "tstclair@heptio.com"  
 
 WORKDIR /app
 RUN apk update --no-cache && apk add ca-certificates
